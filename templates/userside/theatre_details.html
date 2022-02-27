@@ -1,0 +1,294 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Mirrored from pixner.net/boleto/demo/movie-ticket-plan.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Jan 2022 01:50:12 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/odometer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sideprofile.css' %}">
+
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+
+    <title>Boleto - Online Ticket Booking Website HTML Template</title>
+
+
+</head>
+
+<body>
+    <!-- ==========Preloader========== -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Preloader========== -->
+    <!-- ==========Overlay========== -->
+    <div class="overlay"></div>
+    <a href="#0" class="scrollToTop">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- ==========Overlay========== -->
+
+    <!-- ==========Header-Section========== -->
+    <header class="header-section">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a href="\">
+                        <img src="{% static 'images/logo/logo.png' %}" alt="logo">
+                    </a>
+                </div>
+                <ul class="menu">
+                   
+                    {% if user.username %}
+                    <!-- <li>
+                        <div class="thumb">
+                            <img style="width: 2.5em;border-radius: 100px;"
+                                src="{% static 'images/sampleimg/author.jpg' %}" alt="ticket">
+                        </div>
+                    </li> -->
+
+                    <li>
+
+                        <span style="cursor:pointer" onclick="openNav()">Hi, {{user.username|capfirst}}</span>
+
+                    </li>
+
+                    {% else %}
+
+                    <li class="header-button pr-0">
+                        <a href="/signin">Log in</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div class="header-bar d-lg-none">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div style="align-content: center;" id="mySidenav" class="sidenav sidenav_user">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <h5 class="ml-4">{{user.username|capfirst}}</h5>
+                    <a href="booked_tickets">Tickets</a>
+                    <!-- <a href="#">History</a> -->
+                    <ul class="menu">
+                        <li class="header-button pr-0">
+                            <a href="logout">Log out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <!-- ==========Header-Section========== -->
+
+    <!-- ==========Window-Warning-Section========== -->
+    <section class="window-warning inActive">
+        <div class="lay"></div>
+        <div class="warning-item">
+            <h6 class="subtitle">Welcome! </h6>
+            <h4 class="title">Select Your Seats</h4>
+
+            <div class="thumb">
+                <img src="assets/images/movie/seat-plan.png" alt="movie">
+            </div>
+            <a href="movie-seat-plan.html" class="custom-button seatPlanButton">Seat Plans<i
+                    class="fas fa-angle-right"></i></a>
+        </div>
+    </section>
+    <!-- ==========Window-Warning-Section========== -->
+
+    <!-- ==========Banner-Section========== -->
+    <section class="details-banner hero-area bg_img"
+        data-background="https://image.tmdb.org/t/p/w500{{movie.backdrop_path}}">
+        <div class="container">
+            <div class="details-banner-wrapper">
+                <div class="details-banner-content">
+                    <h3 class="title">{{theatre_details.theatre.theatre_name}}</h3>
+                    <div class="tags">
+                        <a href="#0">{{theatre_details.theatre.location}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Banner-Section========== -->
+
+    <!-- ==========Book-Section========== -->
+    <section class="book-section bg-one">
+        <div class="container d-flex justify-content-between">
+
+            <form action="user_select_date_theatre" method="post" class="ticket-search-form two">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="thumb">
+                        <img src="{% static 'images/ticket/date.png' %}" alt="ticket">
+                    </div>
+                    <span class="type">date</span>
+
+                    <select class="select-bar" onchange="this.form.submit()" name="date">
+                        {% for i in theatre_details.all_dates %}
+                        {% with date=request.session.user_show_date %}
+                        {% if date == i %}
+                        <option selected value="{{i}}">{{i}}</option>
+                        {% else %}
+                        <option class="m-4" value="{{i}}">{{i}}</option>
+                        {% endif %}
+                        {% endwith %}
+                        {% endfor %}
+                    </select>
+                    <input type="hidden" name="theatre_id" value="{{theatre_details.theatre.id}}">
+
+                </div>
+            </form>
+            <!-- <form action="user_select_experience" method="post" class="ticket-search-form two">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="thumb">
+                        <img src="{% static 'images/ticket/exp.png' %}" alt="ticket">
+                    </div>
+                    <span class="type">Experience</span>
+
+                    <select class="select-bar" onchange="this.form.submit()" name="date">
+                        {% for i in all_dates %}
+                        {% with date=request.session.user_show_date %}
+                        {% if date == i %}
+                        <option selected value="{{i}}">{{i}}</option>
+                        {% else %}
+                        <option class="m-4" value="{{i}}">{{i}}</option>
+                        {% endif %}
+                        {% endwith %}
+                        {% endfor %}
+                    </select>
+
+                </div>
+            </form> -->
+        </div>
+    </section>
+    <!-- ==========Book-Section========== -->
+
+
+    <!-- ==========Movie-Section========= -->
+    <div class="ticket-plan-section padding-bottom padding-top">
+        <div class="container">
+            <table class="table table-borderless" style="color: aliceblue;">
+                <tbody>
+                    {% for i in theatre_details.movies %}
+                    <tr style="margin: 10px;">
+                        <th scope="row" style="margin-top: 10px;">
+                            <h5>{{i.Movie}}</h5>
+                        </th>
+                        {% for j in theatre_details.shows %}
+                        {% if i == j.movie %}
+                        <td><div style="border-radius: 10%; background-color: rgb(0, 14, 29); margin-bottom: .5em; width: 7em;">
+                            <a href="select_seats?show={{j.id}}">
+                                <h6 class="m-2">{{j.time}}<br>
+                                </h6>
+                            </a>
+                        </div></td>
+                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- ==========Movie-Section========== -->
+
+    <!-- ==========Newslater-Section========== -->
+    <footer class="footer-section">
+        <div class="container">
+            
+            <div class="footer-top">
+                {% if theatre_details.theatre.location_url %}
+                <div style="border-radius: 2em; width: 100%; height: 30em; overflow: hidden;margin-bottom: 2em;"><iframe  src="https://www.google.com/maps/embed?pb={{theatre_details.theatre.location_url}}" width="1200" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+                {% endif %}
+                <div class="logo">
+                    <a href="index-1.html">
+                        <img src="{% static 'images/footer/footer-logo.png' %}" alt="footer">
+                    </a>
+                </div>
+                <!-- <ul class="social-icons">
+                    <li>
+                        <a href="#0">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#0" class="active">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#0">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#0">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#0">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                </ul>-->
+            </div> 
+            <div class="footer-bottom">
+                <div class="footer-bottom-area">
+                    <div class="left">
+                        <p>Copyright © 2020.All Rights Reserved By <a href="#0">Boleto </a></p>
+                        <p id="data"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ==========Newslater-Section========== -->
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/modernizr-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/countdown.min.js' %}"></script>
+    <script src="{% static 'js/odometer.min.js' %}"></script>
+    <script src="{% static 'js/viewport.jquery.js' %}"></script>
+    <script src="{% static 'js/nice-select.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>

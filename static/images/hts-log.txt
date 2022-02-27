@@ -1,0 +1,42 @@
+HTTrack3.49-2+htsswf+htsjava launched on Mon, 03 Jan 2022 07:17:10 at http://pixner.net/boleto/demo/index-2.html +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" http://pixner.net/boleto/demo/index-2.html -O1 "C:\My Web Sites\prooo" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+07:18:38	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/css/all.min.css (from pixner.net/boleto/demo/index-2.html)
+07:18:52	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/favicon.png (from pixner.net/boleto/demo/index-2.html)
+07:27:20	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/movie/movie03.jpg (from pixner.net/boleto/demo/index-2.html)
+07:27:22	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/event/event01.jpg (from pixner.net/boleto/demo/index-2.html)
+07:27:31	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/sports/sports03.jpg (from pixner.net/boleto/demo/index-2.html)
+07:27:32	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/newslater/newslater-bg01.jpg (from pixner.net/boleto/demo/index-2.html)
+07:27:33	Error: 	"Not Found" (404) at link pixner.net/boleto/demo/index-1.html (from pixner.net/boleto/demo/index-2.html)
+07:27:33	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/js/heandline.js (from pixner.net/boleto/demo/index-2.html)
+07:27:34	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/js/magnific-popup.min.js (from pixner.net/boleto/demo/index-2.html)
+07:27:36	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/js/wow.min.js (from pixner.net/boleto/demo/index-2.html)
+07:27:36	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/js/main.js (from pixner.net/boleto/demo/index-2.html)
+07:28:07	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/css/Flaticon.woff2 (from pixner.net/boleto/demo/assets/css/flaticon.css)
+07:28:09	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/css/Flaticon.woff (from pixner.net/boleto/demo/assets/css/flaticon.css)
+07:28:10	Error: 	"Not Found" (404) at link pixner.net/boleto/demo/assets/css/owl.video.play.png (from pixner.net/boleto/demo/assets/css/owl.carousel.min.css)
+07:28:10	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/css/img/ticket-bg04.png (from pixner.net/boleto/demo/assets/css/main.css)
+07:28:10	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/banner/banner02.jpg (from pixner.net/boleto/demo/movie-grid.html)
+07:28:14	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/movie/movie07.jpg (from pixner.net/boleto/demo/movie-grid.html)
+07:28:15	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/movie/movie10.jpg (from pixner.net/boleto/demo/movie-grid.html)
+07:28:16	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/movie/video-button.png (from pixner.net/boleto/demo/movie-details.html)
+07:28:18	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/movie/cake2.png (from pixner.net/boleto/demo/movie-details.html)
+07:28:19	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/movie/seat01.png (from pixner.net/boleto/demo/movie-seat-plan.html)
+07:28:21	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/movie/popcorn/pop2.png (from pixner.net/boleto/demo/popcorn.html)
+07:28:23	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/images/newslater/newslater-bg01.jpg (from pixner.net/boleto/demo/index-2.html)
+07:28:24	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/js/wow.min.js (from pixner.net/boleto/demo/index-2.html)
+07:28:24	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/webfonts/fa-brands-400.eot (from pixner.net/boleto/demo/assets/css/all.min.css)
+07:28:24	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/webfonts/fa-brands-400.woff (from pixner.net/boleto/demo/assets/css/all.min.css)
+07:28:25	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/webfonts/fa-regular-400.woff (from pixner.net/boleto/demo/assets/css/all.min.css)
+07:28:29	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/webfonts/fa-solid-900.eot? (from pixner.net/boleto/demo/assets/css/all.min.css)
+07:28:33	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/css/Flaticon.woff (from pixner.net/boleto/demo/assets/css/flaticon.css)
+07:28:51	Error: 	"No data (connection closed)" (-4) after 2 retries at link pixner.net/boleto/demo/assets/images/newslater/newslater-bg01.jpg (from pixner.net/boleto/demo/index-2.html)
+07:28:51	Warning: 	Retry after error -4 (No data (connection closed)) at link pixner.net/boleto/demo/assets/webfonts/fa-brands-400.eot (from pixner.net/boleto/demo/assets/css/all.min.css)
+
+HTTrack Website Copier/3.49-2 mirror complete in 11 minutes 45 seconds : 290 links scanned, 258 files written (20423632 bytes overall) [17493142 bytes received at 24812 bytes/sec], 4524328 bytes transferred using HTTP compression in 73 files, ratio 30%, 3.2 requests per connection
+(3 errors, 28 warnings, 0 messages)

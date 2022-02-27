@@ -1,0 +1,418 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from pixner.net/boleto/demo/movie-seat-plan.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Jan 2022 01:50:15 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/odometer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sideprofile.css' %}">
+
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+
+    <title>Boleto - Online Ticket Booking Website HTML Template</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+    <!-- ==========Preloader========== -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Preloader========== -->
+    <!-- ==========Overlay========== -->
+    <div class="overlay"></div>
+    <a href="#0" class="scrollToTop">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- ==========Overlay========== -->
+
+    <!-- ==========Header-Section========== -->
+    <header class="header-section">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a href="\">
+                        <img src="{% static 'images/logo/logo.png' %}" alt="logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!-- ==========Header-Section========== -->
+
+
+    <!-- ==========Banner-Section========== -->
+    <!-- <section class="details-banner hero-area bg_img seat-plan-banner"
+        data-background="assets/images/banner/banner04.jpg">
+        <div class="container">
+            <div class="details-banner-wrapper">
+                <div class="details-banner-content style-two">
+                    <h3 class="title">Venus</h3>
+                    <div class="tags">
+                        <a href="#0">City Walk</a>
+                        <a href="#0">English - 2D</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- ==========Banner-Section========== -->
+
+    
+
+
+    <!-- ==========Page-Title========== -->
+    <!-- <section class="page-title bg-one">
+        <div class="container">
+            <div class="page-title-area">
+                <div class="item md-order-1">
+                    <a href="movie-ticket-plan.html" class="custom-button back-button">
+                        <i class="flaticon-double-right-arrows-angles"></i>back
+                    </a>
+                </div>
+                <div class="item date-item">
+                    <span class="date">MON, SEP 09 2020</span>
+                    <select class="select-bar">
+                        <option value="sc1">09:40</option>
+                        <option value="sc2">13:45</option>
+                        <option value="sc3">15:45</option>
+                        <option value="sc4">19:50</option>
+                    </select>
+                </div>
+                <div class="item">
+                    <h5 class="title">05:00</h5>
+                    <p>Mins Left</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- ==========Page-Title========== -->
+
+    <!-- ==========Movie-Section========== -->
+    <div class="seat-plan-section padding-bottom padding-top">
+        <form action="checkout" method="post">
+            {% csrf_token %}
+            <div style="padding: 3em;">
+                <div class="screen-area">
+                    <h4 class="screen">screen</h4>
+                    <input type="hidden" name="show" value="{{show.id}}">
+
+                    <div class="screen-thumb">
+                        <img src="{% static 'images/movie/screen-thumb.png' %}" alt="movie">
+                    </div>
+                    <h5 class="subtitle">silver <span> (₹{{show.screen.s_price}})</span></h5>
+                    <div class="screen-wrapper">
+                        <ul class="seat-area">
+                            {% for row in silver.row %}
+                            <li class="seat-line">
+                                <span>S</span>
+
+
+                                <ul>
+                                    {% for column in silver.column %}
+
+                                    <li class="single-seat" id="S-L-{{row}}-{{column}}">
+                                        <label class="image-checkbox" title="S-L-{{row}}-{{column}}">
+                                            <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
+                                                alt="seat">
+                                            <input type="checkbox" name="silver[]" value="S-L-{{row}}-{{column}}" />
+                                        </label>
+                                    </li>
+                                    <li class="single-seat m-1" id="selected-S-L-{{row}}-{{column}}"
+                                        style="display: none;">
+                                        <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
+
+                                    </li>
+
+                                    {% endfor %}
+                                </ul>
+                                <ul>
+                                    {% for column in silver.column %}
+
+                                    <li class="single-seat" id="S-R-{{row}}-{{column}}">
+                                        <label class="image-checkbox" title="S-R-{{row}}-{{column}}">
+                                            <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
+                                                alt="seat">
+                                            <input type="checkbox" name="silver[]" value="S-R-{{row}}-{{column}}" />
+                                        </label>
+                                    </li>
+                                    <li class="single-seat m-1" id="selected-S-R-{{row}}-{{column}}"
+                                        style="display: none;">
+                                        <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
+
+                                    </li>
+
+                                    {% endfor %}
+                                </ul>
+
+                                <span>S</span>
+                            </li>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <h5 class="subtitle">silver plus<span> (₹{{show.screen.sp_price}})</span></h5>
+                    <div class="screen-wrapper">
+                        <ul class="seat-area">
+                            {% for row in silver_plus.row %}
+                            <li class="seat-line">
+                                <span>S+</span>
+
+
+                                <ul>
+                                    {% for column in silver_plus.column %}
+
+                                    <li class="single-seat" id="SP-L-{{row}}-{{column}}">
+                                        <label class="image-checkbox" title="SP-L-{{row}}-{{column}}">
+                                            <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
+                                                alt="seat">
+                                            <input type="checkbox" name="silver_plus[]"
+                                                value="SP-L-{{row}}-{{column}}" />
+                                        </label>
+                                    </li>
+                                    <li class="single-seat m-1" id="selected-SP-L-{{row}}-{{column}}"
+                                        style="display: none;">
+
+                                        <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
+
+                                    </li>
+
+                                    {% endfor %}
+                                </ul>
+                                <ul>
+                                    {% for column in silver_plus.column %}
+
+                                    <li class="single-seat" id="SP-R-{{row}}-{{column}}">
+                                        <label class="image-checkbox" title="SP-R-{{row}}-{{column}}">
+                                            <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
+                                                alt="seat">
+                                            <input type="checkbox" name="silver_plus[]"
+                                                value="SP-R-{{row}}-{{column}}" />
+                                        </label>
+                                    </li>
+                                    <li class="single-seat m-1" id="selected-SP-R-{{row}}-{{column}}"
+                                        style="display: none;">
+                                        <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
+
+                                    </li>
+
+                                    {% endfor %}
+                                </ul>
+
+                                <span>S+</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                    <h5 class="subtitle">Gold<span> (₹{{show.screen.g_price}})</span></h5>
+                    <div class="screen-wrapper">
+                        <ul class="seat-area">
+                            {% for row in gold.row %}
+                            <li class="seat-line">
+                                <span>G</span>
+
+
+                                <ul>
+                                    {% for column in gold.column %}
+
+                                    <li class="single-seat" id="G-L-{{row}}-{{column}}">
+                                        <label class="image-checkbox" title="G-L-{{row}}-{{column}}">
+                                            <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
+                                                alt="seat">
+                                            <input type="checkbox" name="gold[]" value="G-L-{{row}}-{{column}}" />
+                                        </label>
+                                    </li>
+                                    <li class="single-seat m-1" id="selected-G-L-{{row}}-{{column}}"
+                                        style="display: none;">
+                                        <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
+
+                                    </li>
+
+                                    {% endfor %}
+                                </ul>
+                                <ul>
+                                    {% for column in gold.column %}
+
+                                    <li class="single-seat" id="G-R-{{row}}-{{column}}">
+                                        <label class="image-checkbox" title="G-R-{{row}}-{{column}}">
+                                            <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
+                                                alt="seat">
+                                            <input type="checkbox" name="gold[]" value="G-R-{{row}}-{{column}}" />
+                                        </label>
+                                    </li>
+                                    <li class="single-seat m-1" id="selected-G-R-{{row}}-{{column}}"
+                                        style="display: none;">
+                                        <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
+
+                                    </li>
+
+                                    {% endfor %}
+                                </ul>
+
+                                <span>G</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div id="proceed" style="background-color: black; width: 10em; position: fixed ;left: 2em; bottom: 10em; z-index: 1;border-radius: 25px;display: flex;flex-direction: column; display: none;">
+                <div class="book-item text-center">
+                    <h3 class="title" id="seat_count" style="color: aqua; margin-top: .3em;" >0</h3>
+                </div>
+                <button type="submit" class="custom-button">proceed</button>
+            </div>
+        </form>
+    </div>
+    <!-- ==========Movie-Section========== -->
+
+
+    <!-- ==========Newslater-Section========== -->
+    <footer class="footer-section">
+       
+        <div class="container">
+            <div class="footer-top">
+                <div class="logo">
+                    <a href="index-1.html">
+                        <img src="{% static 'images/footer/footer-logo.png' %}" alt="footer">
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-area">
+                    <div class="left">
+                        <p>Copyright © 2020.All Rights Reserved By <a href="#0">Boleto </a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ==========Newslater-Section========== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            // init the state from the input
+
+
+
+
+            $(".image-checkbox").each(function () {
+                if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
+                    $(this).addClass('image-checkbox-checked');
+                }
+                else {
+                    $(this).removeClass('image-checkbox-checked');
+                }
+            });
+
+            // sync the state to the input
+            $(".image-checkbox").on("click", function (e) {
+                var seat_count = parseInt($('#seat_count').text())
+                if ($(this).hasClass('image-checkbox-checked')) {
+                    $(this).removeClass('image-checkbox-checked');
+                    $(this).find('input[type="checkbox"]').first().removeAttr("checked");
+                    $(this).find('.image-source').attr("src", "{% static 'images/movie/seat01.png' %}");
+                    seat_count -= 1
+                    if (seat_count == 0) {
+                        $('#proceed').hide()
+                    }
+                }
+                else {
+                    $(this).addClass('image-checkbox-checked');
+                    $(this).find('input[type="checkbox"]').first().attr("checked", "checked");
+                    $(this).find('.image-source').attr("src", "{% static 'images/movie/seat_now_booked.png' %}");
+                    seat_count += 1
+                    $('#proceed').show()
+                }
+                $('#seat_count').text(seat_count)
+                e.preventDefault();
+            });
+        });
+    </script>
+    <script>
+        jQuery(function ($) {
+            $(document).ready(function () {
+
+                {% for i in booked %}
+                $("#{{i}}").hide();
+                $("#selected-{{i}}").show();
+                {% endfor %}
+            })
+
+        });
+    </script>
+    <style>
+        .image-checkbox {
+            cursor: pointer;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            border: 4px solid transparent;
+            outline: 0;
+        }
+
+        .image-checkbox input[type="checkbox"] {
+            display: none;
+        }
+    </style>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/modernizr-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/countdown.min.js' %}"></script>
+    <script src="{% static 'js/odometer.min.js' %}"></script>
+    <script src="{% static 'js/viewport.jquery.js' %}"></script>
+    <script src="{% static 'js/nice-select.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+<!-- Mirrored from pixner.net/boleto/demo/movie-seat-plan.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Jan 2022 01:50:20 GMT -->
+
+</html>

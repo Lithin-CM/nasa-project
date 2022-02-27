@@ -1,0 +1,96 @@
+{% load static %}
+
+ <!-- ==========Header-Section========== -->
+ <header class="header-section">
+    <div class="container">
+        <div class="header-wrapper">
+            <div class="logo">
+                <a href="\">
+                    <img src="{% static 'images/logo/logo.png' %}" alt="logo">
+                </a>
+            </div>
+            <ul class="menu">
+                <li>
+                    <a href="#0" class="active">Home</a>
+                    <ul class="submenu">
+                        <li>
+                            <a href="userside/seats">seats</a>
+                        </li>
+                        <li>
+                            <a href="#0" class="active">Home Two</a>
+                        </li>
+                    </ul>
+                </li>
+                <form action="loc_home" method="post" class="ticket-search-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="thumb">
+                            <img src="{% static 'images/ticket/city.png' %}" alt="ticket">
+                        </div>
+                        <span class="type">city</span>
+
+
+                        <select onchange="this.form.submit()" name="my_options" class="select-bar">
+                            {% for i in all_loc %}
+                            {% with loc=request.session.loc %}  
+                            {% if loc == i.location %}
+                            <option selected value="{{i.location}}">{{i.location}}</option>
+                            {% else %}
+                            <option value="{{i.location}}">{{i.location}}</option>
+                            {% endif %}
+                            {% endwith %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </form>
+                {% if user.username %}
+                <li>
+                    <div class="thumb">
+                        <img style="width: 2.5em;border-radius: 100px;"
+                            src="{% static 'images/sampleimg/author.jpg' %}" alt="ticket">
+                    </div>
+                </li>
+
+                <li>
+
+                    <span style="cursor:pointer" onclick="openNav()">Hi, {{user.username|capfirst}}</span>
+
+                </li>
+
+                {% else %}
+
+                <li class="header-button pr-0">
+                    <a href="/signin">Log in</a>
+                </li>
+                {% endif %}
+            </ul>
+            <div class="header-bar d-lg-none">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div style="align-content: center;" id="mySidenav" class="sidenav sidenav_user">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <h5 class="ml-4">{{user.username|capfirst}}</h5>
+                <a href="booked_tickets">Tickets</a>
+                <a href="#">History</a>
+                <ul class="menu">
+                    <li class="header-button pr-0">
+                        <a href="logout">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</header>
+<!-- ==========Header-Section========== -->
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
