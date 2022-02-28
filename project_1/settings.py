@@ -109,9 +109,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'nasa',
-        'USER': 'root',
-        'PASSWORD': '!@@Lithin12345',
-        'HOST':'localhost',
+        'USER': 'admin',
+        'PASSWORD': 'lithin12345',
+        'HOST':'database-1.crte573uluxb.us-east-1.rds.amazonaws.com',
         'PORT':'3306',
     }
 }
