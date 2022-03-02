@@ -211,14 +211,22 @@ def booked_tickets(request):
     if request.session.has_key('coupen_used'):
         del request.session['coupen_used']
 
-    user = request.user
-    valid_tickets = tickets.objects.filter(user_id=user.id)
+    
+    if request.session.has_key('user'):
+        username =request.session['user']
+        user =extends.objects.get(username=username)
+        
+    valid_tickets=[]
+    all_tickets = tickets.objects.filter(user_id=user.id)
+    current_date= datetime.date.today()
+    for i in all_tickets:
+        if i.show.exp_date >= current_date:
+            valid_tickets.append(i)
     
     all_seats = booked_seats.objects.filter(user_id=user.id)
     valid_seats=[]
     current_date= datetime.date.today()
     for i in all_seats:
-        print(i.show.exp_date)
         if i.show.exp_date >= current_date:
             valid_seats.append(i)
 
@@ -478,14 +486,12 @@ def check_promo(request):
         if promocodes.objects.filter(code=code).exists():
             code=promocodes.objects.get(code=code)
             offer=code.coupen_offer
-            print(offer,'===========')
             if used_codes.objects.filter(code_id=code.id,user_id=user.id).exists():
                 request.session['coupen_used']=show_id
                 return redirect('/userside/checkout')            
             else:
                 request.session['coupen_show_id']=show_id
                 used_codes.objects.create(code_id=code.id,user_id=user.id)
-                print(offer,'===========')
                 return redirect('/userside/checkout?offer='+str(offer))
         else:
             request.session['coupen_not_available']=show_id
