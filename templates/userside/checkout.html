@@ -137,6 +137,7 @@
                             </div>
                         </form>
                     </div> -->
+                    {% if user.username %}
                     {% if 'coupen_show_id' in request.session %}
                     <div id="promocode" class="checkout-widget checkout-contact">
                         <img style="width: 100%; height: 100%;" src="{% static 'images/banner/banner02.jpg' %}" alt="">
@@ -160,6 +161,11 @@
                                 <button type="submit" class="custom-button">submit</button>
                             </div>
                         </form>
+                    </div>
+                    {% endif %}
+                    {% else %}
+                    <div id="promocode" class="checkout-widget checkout-contact">
+                        <img style="width: 100%; height: 100%;" src="{% static 'images/banner/banner02.jpg' %}" alt="">
                     </div>
                     {% endif %}
                     <div class="checkout-widget checkout-card mb-0" id="payment_div"

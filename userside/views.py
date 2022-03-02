@@ -132,6 +132,7 @@ def checkout(request):
         if not request.session.session_key:
             request.session.create()
         g_user_id = request.session.session_key
+        print(g_user_id,'===============================================')
         request.session['g_user_key']= g_user_id
 
         silver_var = request.POST.getlist('silver[]')
@@ -141,7 +142,9 @@ def checkout(request):
         seats = {'silver':silver_var,'silver_plus':silver_plus_var,'gold':gold_var}
         for i,k in seats.items():
             for j in k:
-                booked_seats.objects.create(show_id=showid, g_user=g_user_id, seat_no = j, seat_category =i)
+                
+                booked_seats(show_id=showid, g_user=g_user_id, seat_no = j, seat_category =i).save()
+                print(showid,'==========',g_user_id,'==========',j,'==========',i)
           
 
     show = shows.objects.get(id=showid)
@@ -210,10 +213,12 @@ def booked_tickets(request):
 
     user = request.user
     valid_tickets = tickets.objects.filter(user_id=user.id)
+    
     all_seats = booked_seats.objects.filter(user_id=user.id)
     valid_seats=[]
     current_date= datetime.date.today()
     for i in all_seats:
+        print(i.show.exp_date)
         if i.show.exp_date >= current_date:
             valid_seats.append(i)
 
@@ -494,13 +499,9 @@ def check_promo(request):
 @never_cache
 def book_tickets(request):
     show_id = request.GET['show']
-    print(type(request.GET['amount_payable']))
-    print('================+++++++++++++++++++++++++')
     
     amount_payable = int(float(request.GET['amount_payable']))
     
-    
-    print('=================================================')
     if request.session.has_key('user'):
         username =request.session['user']
         user = extends.objects.get(username = username)
