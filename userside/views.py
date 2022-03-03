@@ -212,9 +212,7 @@ def booked_tickets(request):
         del request.session['coupen_used']
 
     
-    if request.session.has_key('user'):
-        username =request.session['user']
-        user =extends.objects.get(username=username)
+    
         
     valid_tickets=[]
     all_tickets = tickets.objects.filter(user_id=user.id)
@@ -463,6 +461,10 @@ def theatre_result(request):
         'all_dates':dates
     }
     return render(request,'userside/theatre_details.html',{'theatre_details':theatre_details})
+
+
+
+    
 
 def user_select_date_theatre(request):
     if request.method=='POST':
