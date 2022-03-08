@@ -14,6 +14,7 @@ class theatres(models.Model):
     password = models.CharField(max_length=100,null=False)
     username = models.CharField(max_length=30,unique=True,null=False)
     location_url = models.CharField(max_length=500,null=True)
+    active = models.BooleanField(default='True')
 
 
 

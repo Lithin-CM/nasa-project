@@ -14,11 +14,12 @@
 </head>
 
 <body class="bg-info">
-    <div class="col-md-8">
+    <div class="col-md-8" style="padding: 5em;">
         <form class="row g-3" method="post" action="edit_screen">
             {% csrf_token %}
             <div class="col-md-12">
-                <label for="inputEmail4" class="form-label">Screen name</label>
+                <h1>Edit {{items.screen_name}}</h1>
+                
                 <input type="text" name="screen_name" value="{{items.screen_name}}" class="form-control" id="inputEmail4">
             </div>
             <div class="col-md-12">

@@ -101,6 +101,8 @@ def select_seats(request):
 
 @never_cache
 def checkout(request):
+    if request.session.has_key('login_after_selection'):
+        del request.session['login_after_selection']
     err=''
     if request.method=='GET':
         if request.session.has_key('login_after_selection'):
@@ -132,7 +134,6 @@ def checkout(request):
         if not request.session.session_key:
             request.session.create()
         g_user_id = request.session.session_key
-        print(g_user_id,'===============================================')
         request.session['g_user_key']= g_user_id
 
         silver_var = request.POST.getlist('silver[]')
@@ -144,9 +145,7 @@ def checkout(request):
             for j in k:
                 
                 booked_seats(show_id=showid, g_user=g_user_id, seat_no = j, seat_category =i).save()
-                print(showid,'==========',g_user_id,'==========',j,'==========',i)
-          
-
+                
     show = shows.objects.get(id=showid)
 
     s_price=show.screen.s_price
@@ -212,7 +211,9 @@ def booked_tickets(request):
         del request.session['coupen_used']
 
     
-    
+    if request.session.has_key('user'):
+        username =request.session['user']
+        user =extends.objects.get(username=username)
         
     valid_tickets=[]
     all_tickets = tickets.objects.filter(user_id=user.id)
@@ -480,11 +481,15 @@ def user_select_date_theatre(request):
 
 
 def check_promo(request):
-
+    if request.session.has_key('login_after_selection'):
+        del request.session['login_after_selection']
+    if request.session.has_key('user'):
+        username = request.session['user']
+        user = extends.objects.get(username=username)
     if request.method=='POST':
         code =request.POST['code']  
         show_id =request.POST['show_id']
-        user =request.user
+        
         if promocodes.objects.filter(code=code).exists():
             code=promocodes.objects.get(code=code)
             offer=code.coupen_offer

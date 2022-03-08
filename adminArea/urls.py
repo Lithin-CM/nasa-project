@@ -13,6 +13,8 @@ urlpatterns = [
     path('movie_delete', views.movie_delete, name='movie_delete'),
     path('theatre_delete', views.theatre_delete, name='theatre_delete'),
     path('add_coupens', views.add_coupens, name='add_coupens'),
+    path('block_user',views.block_user, name='block_user'),
+    path('block_theatre',views.block_theatre, name='block_theatre'),
 
     
 ]

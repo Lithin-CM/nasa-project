@@ -12,6 +12,7 @@ from dateutil.relativedelta import *
 @never_cache
 def admin_home(request):
      if request.session.has_key('super'):
+          admin = request.session['super']
           valid_tickets = tickets.objects.all()
           event_date= datetime.date.today()
           months=[]
@@ -90,10 +91,27 @@ def admin_home(request):
                'all_sold_tickets':all_sold_tickets,
                'total_price':total_price
           }
-          return render(request,'admin/index.html',{'data':data,'day_data':day_data,'month_data':month_data})
+          return render(request,'admin/index.html',{'data':data,'day_data':day_data,'month_data':month_data,'admin':admin})
      return render(request,'home.html')
 
 
+def block_user(request):
+     id = request.GET['id']
+     user = extends.objects.get(id = id)
+     user.is_active  = not (user.is_active)
+     user.save()
+     return redirect('/admin/manage_user')
+
+
+def block_theatre(request):
+     id = request.GET['id']
+     theatre = theatres.objects.get(id = id)
+     if theatre.active:
+          theatres.objects.filter(id=id).update(active =False)
+     else:
+          theatres.objects.filter(id=id).update(active =True)
+
+     return redirect('/admin/manage_theatres')
 
 
 @never_cache

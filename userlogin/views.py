@@ -63,7 +63,7 @@ def home(request):
     if request.session.has_key('data'):
         del request.session['data']
     if request.session.has_key('login_after_selection'):
-       return redirect('userside/checkout')
+        return redirect('userside/checkout')
         
     if request.session.has_key('super'):
         return redirect(admin_home)
@@ -267,11 +267,13 @@ def user_login_otp(request):
         phone = request.POST['phone']
         if extends.objects.filter(phonenum=phone).exists():
             user = extends.objects.get(phonenum=phone)
-            username = user.username    
-            num ="+91"+phone
-            if send(num):  
-                return redirect(u_login_verify)
-            
+            if user.is_active:
+                username = user.username    
+                num ="+91"+phone
+                if send(num):  
+                    return redirect(u_login_verify)
+            return render(request, 'user-otp.html',{'err': "This user is blocked by the admin"})
+
         return render(request, 'user-otp.html',{'err': "number doesn't exist"})
         
     return render(request,'user-otp.html')

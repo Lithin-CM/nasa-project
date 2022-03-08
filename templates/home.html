@@ -166,6 +166,7 @@
 
 
     <!-- =========Movies in Location========== -->
+    {% if movies_in_location %}
     <section class="movie-section padding-top padding-bottom">
         <div class="container">
             <div class="tab">
@@ -214,10 +215,11 @@
             </div>
         </div>
     </section>
-
+    {% endif %}
     <!-- =========Movies in Location========== -->
 
     <!-- ==========Movie-Section========== -->
+    {% if upcoming_movie %}
     <section class="movie-section padding-top padding-bottom">
         <div class="container">
             <div class="tab">
@@ -268,6 +270,7 @@
             </div>
         </div>
     </section>
+    {% endif %}
     <!-- ==========Movie-Section========== -->
 
     <!-- ==========Event-Section========== -->

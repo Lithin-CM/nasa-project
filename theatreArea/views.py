@@ -1,10 +1,13 @@
 from hashlib import sha1
 from itertools import count
+import re
 from django.shortcuts import render,redirect
 from userlogin.forms import CreateLoginForm
 from .models import theatres,screens,shows,movies,booked_seats,tickets
 import datetime
 from dateutil.relativedelta import *
+from datetime import timedelta,time
+
 
 
 
@@ -103,13 +106,14 @@ def home(request):
             'all_sold_tickets':all_sold_tickets,
             'total_price':total_price
         }
-        return render(request,'theatre_owner/dashboard.html',{'screen':screen,'data':data,'day_data':day_data,'month_data':month_data})
+        return render(request,'theatre_owner/dashboard.html',{'screen':screen,'data':data,'day_data':day_data,'month_data':month_data,'owner':owner})
     return redirect(login)
 
 
 
 def screen(request):
     event_date = datetime.date.today()
+    print(request.GET.get('error' or 0))
     dates =[]
     for i in range(10):
         current_date = event_date + datetime.timedelta(days=i)
@@ -150,10 +154,12 @@ def login(request):
             username = request.POST['username']
             password = request.POST['password']
             if theatres.objects.filter(username=username).exists():
+
                 user = theatres.objects.get(username=username)
-               
+                if user.active == False :
+                    return render(request,'theatre/sign-in.html',{'form':form,"err":"This user is blocked for inappropriate activity"})
+                
                 pas = user.password
-              
                 if pas == password:
                     request.session['theatre'] = username
                     return redirect(home)
@@ -193,10 +199,27 @@ def add_show(request):
     if request.method=='POST':
         date = request.POST['date']
         screen_id = request.POST['id']
-        time = request.POST['time']
+        timee = request.POST['time']
         movie = request.POST['movie']
-        shows.objects.create(time=time, movie_id=movie, screen_id=screen_id, exp_date=date).save()
-        return redirect('/theatre/screen?id='+screen_id)
+
+        current_shows = shows.objects.filter(screen_id=screen_id, exp_date=date)
+        flag =0
+        start_time = datetime.datetime.strptime(timee, '%H:%M').time()
+        for i in current_shows:  
+            endtime =(datetime.datetime.combine(i.exp_date,i.time)+ timedelta(hours=3)).time()
+            if start_time >=i.time  and   start_time < endtime :
+                flag =1
+            else:
+                pass
+        
+        if flag ==0:
+            shows.objects.create(time=timee, movie_id=movie, screen_id=screen_id, exp_date=date).save()
+            return redirect('/theatre/screen?id='+screen_id)
+        else:
+            return redirect('/theatre/screen?id='+screen_id+'&&`error=adssadsa')
+
+
+
 
 
 

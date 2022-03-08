@@ -67,53 +67,6 @@
     <!-- ==========Header-Section========== -->
 
 
-    <!-- ==========Banner-Section========== -->
-    <!-- <section class="details-banner hero-area bg_img seat-plan-banner"
-        data-background="assets/images/banner/banner04.jpg">
-        <div class="container">
-            <div class="details-banner-wrapper">
-                <div class="details-banner-content style-two">
-                    <h3 class="title">Venus</h3>
-                    <div class="tags">
-                        <a href="#0">City Walk</a>
-                        <a href="#0">English - 2D</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- ==========Banner-Section========== -->
-
-    
-
-
-    <!-- ==========Page-Title========== -->
-    <!-- <section class="page-title bg-one">
-        <div class="container">
-            <div class="page-title-area">
-                <div class="item md-order-1">
-                    <a href="movie-ticket-plan.html" class="custom-button back-button">
-                        <i class="flaticon-double-right-arrows-angles"></i>back
-                    </a>
-                </div>
-                <div class="item date-item">
-                    <span class="date">MON, SEP 09 2020</span>
-                    <select class="select-bar">
-                        <option value="sc1">09:40</option>
-                        <option value="sc2">13:45</option>
-                        <option value="sc3">15:45</option>
-                        <option value="sc4">19:50</option>
-                    </select>
-                </div>
-                <div class="item">
-                    <h5 class="title">05:00</h5>
-                    <p>Mins Left</p>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- ==========Page-Title========== -->
-
     <!-- ==========Movie-Section========== -->
     <div class="seat-plan-section padding-bottom padding-top">
         <form action="checkout" method="post">
@@ -141,7 +94,8 @@
                                         <label class="image-checkbox" title="S-L-{{row}}-{{column}}">
                                             <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
                                                 alt="seat">
-                                            <input type="checkbox" name="silver[]" value="S-L-{{row}}-{{column}}" />
+                                            <input type="checkbox" name="silver[]" value="S-L-{{row}}-{{column}}"
+                                                class="seat-checkbox" />
                                         </label>
                                     </li>
                                     <li class="single-seat m-1" id="selected-S-L-{{row}}-{{column}}"
@@ -159,7 +113,8 @@
                                         <label class="image-checkbox" title="S-R-{{row}}-{{column}}">
                                             <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
                                                 alt="seat">
-                                            <input type="checkbox" name="silver[]" value="S-R-{{row}}-{{column}}" />
+                                            <input type="checkbox" name="silver[]" value="S-R-{{row}}-{{column}}"
+                                                class="seat-checkbox" />
                                         </label>
                                     </li>
                                     <li class="single-seat m-1" id="selected-S-R-{{row}}-{{column}}"
@@ -192,8 +147,8 @@
                                         <label class="image-checkbox" title="SP-L-{{row}}-{{column}}">
                                             <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
                                                 alt="seat">
-                                            <input type="checkbox" name="silver_plus[]"
-                                                value="SP-L-{{row}}-{{column}}" />
+                                            <input type="checkbox" name="silver_plus[]" value="SP-L-{{row}}-{{column}}"
+                                                class="seat-checkbox" />
                                         </label>
                                     </li>
                                     <li class="single-seat m-1" id="selected-SP-L-{{row}}-{{column}}"
@@ -212,8 +167,8 @@
                                         <label class="image-checkbox" title="SP-R-{{row}}-{{column}}">
                                             <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
                                                 alt="seat">
-                                            <input type="checkbox" name="silver_plus[]"
-                                                value="SP-R-{{row}}-{{column}}" />
+                                            <input type="checkbox" name="silver_plus[]" value="SP-R-{{row}}-{{column}}"
+                                                class="group1" />
                                         </label>
                                     </li>
                                     <li class="single-seat m-1" id="selected-SP-R-{{row}}-{{column}}"
@@ -246,7 +201,8 @@
                                         <label class="image-checkbox" title="G-L-{{row}}-{{column}}">
                                             <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
                                                 alt="seat">
-                                            <input type="checkbox" name="gold[]" value="G-L-{{row}}-{{column}}" />
+                                            <input type="checkbox" name="gold[]" value="G-L-{{row}}-{{column}}"
+                                                class="seat-checkbox" />
                                         </label>
                                     </li>
                                     <li class="single-seat m-1" id="selected-G-L-{{row}}-{{column}}"
@@ -264,7 +220,8 @@
                                         <label class="image-checkbox" title="G-R-{{row}}-{{column}}">
                                             <img class="image-source" src="{% static 'images/movie/seat01.png' %}"
                                                 alt="seat">
-                                            <input type="checkbox" name="gold[]" value="G-R-{{row}}-{{column}}" />
+                                            <input type="checkbox" name="gold[]" value="G-R-{{row}}-{{column}}"
+                                                class="seat-checkbox" />
                                         </label>
                                     </li>
                                     <li class="single-seat m-1" id="selected-G-R-{{row}}-{{column}}"
@@ -284,9 +241,10 @@
                     </div>
                 </div>
             </div>
-            <div id="proceed" style="background-color: black; width: 10em; position: fixed ;left: 2em; bottom: 10em; z-index: 1;border-radius: 25px;display: flex;flex-direction: column; display: none;">
+            <div id="proceed"
+                style="background-color: black; width: 10em; position: fixed ;left: 2em; bottom: 10em; z-index: 1;border-radius: 25px;display: flex;flex-direction: column; display: none;">
                 <div class="book-item text-center">
-                    <h3 class="title" id="seat_count" style="color: aqua; margin-top: .3em;" >0</h3>
+                    <h3 class="title" id="seat_count" style="color: aqua; margin-top: .3em;">0</h3>
                 </div>
                 <button type="submit" class="custom-button">proceed</button>
             </div>
@@ -297,7 +255,7 @@
 
     <!-- ==========Newslater-Section========== -->
     <footer class="footer-section">
-       
+
         <div class="container">
             <div class="footer-top">
                 <div class="logo">
@@ -329,16 +287,23 @@
 
 
             $(".image-checkbox").each(function () {
-                if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
-                    $(this).addClass('image-checkbox-checked');
-                }
-                else {
-                    $(this).removeClass('image-checkbox-checked');
-                }
+
+                    if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
+                        $(this).addClass('image-checkbox-checked');
+                    }
+                    else {
+                        $(this).removeClass('image-checkbox-checked');
+                    }
+                
             });
 
             // sync the state to the input
             $(".image-checkbox").on("click", function (e) {
+
+
+                
+
+
                 var seat_count = parseInt($('#seat_count').text())
                 if ($(this).hasClass('image-checkbox-checked')) {
                     $(this).removeClass('image-checkbox-checked');
@@ -348,16 +313,22 @@
                     if (seat_count == 0) {
                         $('#proceed').hide()
                     }
+                    $('#seat_count').text(seat_count)
+                    e.preventDefault();
                 }
                 else {
+                    if (seat_count <10){
                     $(this).addClass('image-checkbox-checked');
                     $(this).find('input[type="checkbox"]').first().attr("checked", "checked");
                     $(this).find('.image-source').attr("src", "{% static 'images/movie/seat_now_booked.png' %}");
                     seat_count += 1
+
                     $('#proceed').show()
+                    $('#seat_count').text(seat_count)
+                    e.preventDefault();
                 }
-                $('#seat_count').text(seat_count)
-                e.preventDefault();
+                }
+                
             });
         });
     </script>

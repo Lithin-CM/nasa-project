@@ -28,6 +28,7 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
+    <h1 style="color: aliceblue; margin-top: 1em; margin-left: 2em;">Manage theatres</h1>
     <div style="margin: 5em; background-color: aliceblue; padding: 1em; border-radius: 20px;">
       <table id="example" class="table table-sm">
         <thead>
@@ -57,13 +58,115 @@
             <td>{{i.location}}</td>
             <td>{{i.email}}</td>
             <td>{{i.phone}}</td>
-  
-            <td style="text-align: end;"><a href="update?id={{i.id}}"><button type="button"
-                  class="btn btn-warning">block</button></a>
-  
-              <a href="theatre_delete?id={{i.id}}"><button style="margin-left: 2em;margin-right: 1em;" type="button"
-                  class="btn btn-danger">Delete</button></a>
+            {% if i.active %}
+            <td style="text-align: end">
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal{{i.id}}"
+              >
+                Block
+              </button>
+
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal{{i.id}}"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Confirmation
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to block
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <a href="block_theatre?id={{i.id}}">
+                        <button href="" type="button" class="btn btn-success">
+                          Block
+                        </button></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
             </td>
+            {% else %}
+            <td style="text-align: end">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal{{i.id}}"
+              >
+                UnBlock
+              </button>
+
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal{{i.id}}"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Confirmation
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to Unblock
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <a href="block_theatre?id={{i.id}}">
+                        <button href="" type="button" class="btn btn-danger">
+                          UnBlock
+                        </button></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+
+            {% endif %}
+           
   
           </tr>
   
