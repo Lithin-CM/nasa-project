@@ -14,9 +14,12 @@ from datetime import time
 import uuid 
 from django.core.paginator import Paginator
 
+from decouple import config
 
-api_key = "e8059443c46470e54e1594d1d888e61d"
-api_base_url = "https://api.themoviedb.org/3"
+
+
+api_key = config("TMDB_Apikey")
+api_base_url = config("TMDB_URL")
 
 
 
@@ -123,7 +126,7 @@ def checkout(request):
         g_user_id = request.session['g_user_key']
         
         silver_var = [i.seat_no for i in booked_seats.objects.filter(g_user =g_user_id, show_id = showid, seat_category = 'silver')]
-        silver_plus_var = [i.seat_no for i in booked_seats.objects.filter(g_user =g_user_id, show_id = showid, seat_category = 'silver_plus')]
+        silver_plus_var = [i.seat_noconfig("TMDB_Apikey") for i in booked_seats.objects.filter(g_user =g_user_id, show_id = showid, seat_category = 'silver_plus')]
         gold_var = [i.seat_no for i in booked_seats.objects.filter(g_user =g_user_id, show_id = showid, seat_category = 'gold')]
         
         seats = {'silver':silver_var,'silver_plus':silver_plus_var,'gold':gold_var}
@@ -512,7 +515,7 @@ def check_promo(request):
 @never_cache
 def book_tickets(request):
     show_id = request.GET['show']
-    
+    from decouple import config
     amount_payable = int(float(request.GET['amount_payable']))
     
     if request.session.has_key('user'):

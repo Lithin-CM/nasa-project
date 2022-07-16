@@ -12,12 +12,15 @@ from django.contrib.auth import logout as auth_logout
 import requests
 from theatreArea.models import movies, theatres, screens, shows
 
+from decouple import config
+
+
 num = ''
 fm = ''
 form = ''
 username = ''
-api_key = "e8059443c46470e54e1594d1d888e61d"
-api_base_url = "https://api.themoviedb.org/3"
+api_key = config("TMDB_Apikey")
+api_base_url = config("TMDB_URL")
 
 # Create your views here.
 
@@ -25,12 +28,12 @@ api_base_url = "https://api.themoviedb.org/3"
 def send(num):
 
     try:
-        account_sid = os.environ['TWILIO_ACCOUNT_SID'] = 'AC47ee2cb8e3c7bf4214f26c4b28aa0cda'
-        auth_token = os.environ['TWILIO_AUTH_TOKEN'] = '500b3a8891b8b8b0635abd3fed4f7612'
+        account_sid = os.environ['TWILIO_ACCOUNT_SID'] = config("Twilo_Account")
+        auth_token = os.environ['TWILIO_AUTH_TOKEN'] = config("TWILIO_AUTH_TOKEN")
         client = Client(account_sid, auth_token)
 
         verification = client.verify \
-                            .services('VAb1895c1a621f559499d45a7451cdb394') \
+                            .services(config("services")) \
                             .verifications \
                             .create(to=num, channel='sms')
         return True                    
@@ -42,12 +45,12 @@ def send(num):
 def verify(otp):
     global num
     try:
-        account_sid = os.environ['TWILIO_ACCOUNT_SID'] = 'AC47ee2cb8e3c7bf4214f26c4b28aa0cda'
-        auth_token = os.environ['TWILIO_AUTH_TOKEN'] =  '500b3a8891b8b8b0635abd3fed4f7612'
+        account_sid = os.environ['TWILIO_ACCOUNT_SID'] =config("Twilo_Account")
+        auth_token = os.environ['TWILIO_AUTH_TOKEN'] =  config("TWILIO_AUTH_TOKEN")
         client = Client(account_sid, auth_token)
 
         verification_check = client.verify \
-                                .services('VAb1895c1a621f559499d45a7451cdb394') \
+                                .services(config("services")) \
                                 .verification_checks \
                                 .create(to=num, code=otp)
 

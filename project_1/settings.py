@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path,os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -173,8 +173,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '868238271238-uq5mqnafdt5noj4mg66oaehlppabvak8.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
 
 
 LOGIN_URL = 'signin'
@@ -184,7 +184,8 @@ LOGIN_REDIRECT_URL = 'google_login'
 
 
 
-RAZORPAY_API_KEY = 'rzp_test_KMWHThlVLmQw0B'
+RAZORPAY_API_KEY =config("RAZORPAY_API_KEY")
 
 
-RAZORPAY_API_SECRET_KEY = 'eQOGkF0DCfBshBK60jnSei1M'
+RAZORPAY_API_SECRET_KEY =config("RAZORPAY_API_SECRET_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=config("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
